@@ -13,6 +13,7 @@ export class StoreService {
   public registrations: Registration[] = [];
   public registrationTotalCount: number = 0;
   public currentPage: number = 1;
+
   public coursesLoading = true;
-  public registrationLoading= true;
+  public registrationLoading = true;
 }

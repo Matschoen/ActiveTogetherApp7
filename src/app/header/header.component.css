@@ -1,5 +1,5 @@
 .flex {
-    display: flex;
+  display: flex;
 }
 
 img {
@@ -10,7 +10,6 @@ img {
   position: relative;
   object-fit: cover;
   display: block;
-
 }
 
 h1 {
@@ -20,7 +19,6 @@ h1 {
   text-shadow: 3px 4px black;
   font-family: "Lucida Handwriting";
 }
-
 
 .button-link {
   text-decoration: none;
@@ -44,5 +42,3 @@ h1 {
   background-color: #004080;
   transform: translateY(0);
 }
-
-

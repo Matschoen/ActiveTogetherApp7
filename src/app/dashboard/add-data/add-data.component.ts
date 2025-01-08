@@ -6,7 +6,7 @@ import { MatFormField, MatInputModule } from "@angular/material/input";
 import { MatSelectModule } from "@angular/material/select";
 import { MatCheckboxModule } from "@angular/material/checkbox";
 import { MatButtonModule } from "@angular/material/button";
-import {NgForOf, NgIf} from "@angular/common";
+import { NgForOf, NgIf } from "@angular/common";
 import { MatLabel } from "@angular/material/form-field";
 import { MatOption } from "@angular/material/core";
 
@@ -49,14 +49,19 @@ export class AddDataComponent implements OnInit {
 
   onSubmit() {
     if (this.registrationForm.valid) {
-      this.backendService.addRegistration(this.registrationForm.value, this.storeService.currentPage);
 
+
+      const newRegistration = {
+        ...this.registrationForm.value,
+        registrationDate: new Date().toISOString()
+      };
+
+      this.backendService.addRegistration(newRegistration, this.storeService.currentPage);
 
       this.showToast = true;
       setTimeout(() => {
         this.showToast = false;
       }, 3000);
-
 
       this.registrationForm.reset();
     }

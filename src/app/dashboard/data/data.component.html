@@ -1,81 +1,107 @@
-<div class="container">
-
-
-  <div class="row mt-2">
-    <div class="col-12 col-md-10 offset-md-1">
-      <h3 class="mb-3 text-center">Kurse</h3>
-
-      <div class="table-responsive">
-        <table class="table table-striped table-bordered">
-          <thead>
-          <tr>
-            <th>Kurs</th>
-            <th>Veranstaltungsort</th>
-            <th>Adresse</th>
-            <th>Öffentlich erreichbar?</th>
-            <th>Kursleiter</th>
-            <th>Alle Termine</th>
-          </tr>
-          </thead>
-          <tbody>
-          <tr *ngFor="let course of storeService.courses">
-            <td>{{ course.name }}</td>
-            <td>{{ course.eventLocation.name }}</td>
-            <td>{{ course.eventLocation.address }}</td>
-            <td>{{ course.eventLocation.venueByPublicTansport ? 'Ja' : 'Nein' }}</td>
-            <td>{{ course.instructor }}</td>
-            <td>
-              <ul>
-                <li *ngFor="let date of course.dates">
-                  <span>{{ date.begin | date:"MMM dd, yyyy 'um' hh:mm a" }}</span> -
-                  <span>{{ date.end | date:"MMM dd, yyyy 'um' hh:mm a" }}</span>
-                </li>
-              </ul>
-            </td>
-          </tr>
-          </tbody>
-        </table>
-      </div>
+<div class="row mt-2">
+  <div class="col-12 col-md-10 offset-md-1">
+    <h3 class="mb-3 text-center">Kurse</h3>
+    <div class="table-responsive">
+      <table class="table table-striped table-bordered">
+        <thead>
+        <tr>
+          <th>Kurs</th>
+          <th>Veranstaltungsort</th>
+          <th>Adresse</th>
+          <th>Öffentlich erreichbar?</th>
+          <th>Kursleiter</th>
+          <th>Alle Termine</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr *ngFor="let course of storeService.courses">
+          <td>{{ course.name }}</td>
+          <td>{{ course.eventLocation.name }}</td>
+          <td>{{ course.eventLocation.address }}</td>
+          <td>{{ course.eventLocation.venueByPublicTansport ? 'Ja' : 'Nein' }}</td>
+          <td>{{ course.instructor }}</td>
+          <td>
+            <ul>
+              <li *ngFor="let date of course.dates">
+                <span>{{ date.begin | date:"MMM dd, yyyy 'um' HH:mm" }}</span> -
+                <span>{{ date.end | date:"MMM dd, yyyy 'um' HH:mm" }}</span>
+              </li>
+            </ul>
+          </td>
+        </tr>
+        </tbody>
+      </table>
     </div>
   </div>
+</div>
 
+<!-- Registrierungstabelle -->
+<div class="row mt-4">
+  <div class="col-12 col-md-10 offset-md-1">
+    <h3 class="mb-3 text-center">Registrierte Personen</h3>
 
-  <div class="row mt-4">
-    <div class="col-12 col-md-10 offset-md-1">
-      <h3 class="mb-3 text-center">Registrierte Personen</h3>
-      <div class="table-responsive">
-        <table class="table table-striped table-bordered">
-          <thead>
-          <tr>
-            <th>Name</th>
-            <th>Geburtsdatum</th>
-            <th>Kurs</th>
-          </tr>
-          </thead>
-          <tbody>
-          <tr *ngFor="let registration of storeService.registrations">
-            <td>{{ registration.name }}</td>
-            <td>{{ registration.birthdate }}</td>
-            <td>{{ registration.course.name }}</td>
-          </tr>
-          </tbody>
-        </table>
-      </div>
+    <div class="table-responsive">
+      <table class="table table-striped table-bordered">
+        <thead>
+        <tr>
+          <th>Name</th>
+          <th>Geburtsdatum</th>
+          <th>Kurs</th>
+
+          <th (click)="toggleSortOrder()" style="cursor: pointer;">
+            Anmeldedatum
+            <!-- Pfeil nach oben oder unten -->
+            <span *ngIf="sortOrder === 'desc'">&#x25BC;</span>
+            <span *ngIf="sortOrder === 'asc'">&#x25B2;</span>
+          </th>
+
+          <th>Aktionen</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr
+          *ngFor="let registration of storeService.registrations"
+          class="position-relative">
+
+          <!-- Spinner/Overlay -->
+          <div
+            *ngIf="isDeleting(registration.id)"
+            class="overlay-spinner d-flex align-items-center justify-content-center">
+            <div class="spinner-border text-primary" role="status">
+              <span class="visually-hidden">Loading...</span>
+            </div>
+          </div>
+          <!-- Ende Overlay -->
+
+          <td>{{ registration.name }}</td>
+          <td>{{ registration.birthdate }}</td>
+          <td>{{ registration.course.name }}</td>
+          <td>{{ registration.registrationDate | date:'dd.MM.yyyy HH:mm' }}</td>
+          <td>
+            <button
+              class="btn btn-danger"
+              (click)="deleteRegistration(registration.id)"
+              [disabled]="isDeleting(registration.id)">
+              Abmelden
+            </button>
+          </td>
+        </tr>
+        </tbody>
+      </table>
     </div>
   </div>
+</div>
 
-
-  <div class="row mt-4 justify-content-center">
-    <div class="col-12 col-md-10 offset-md-1 d-flex justify-content-center gap-2">
-      <button
-        [ngClass]="page == storeService.currentPage ? 'active' : ''"
-        (click)="selectPage(page)"
-        type="button"
-        *ngFor="let page of returnAllPages()"
-      >
-        {{ page }}
-      </button>
-    </div>
+<!-- Pagination -->
+<div class="row mt-4 justify-content-center">
+  <div class="col-12 col-md-10 offset-md-1 d-flex justify-content-center gap-2">
+    <button
+      [ngClass]="page == storeService.currentPage ? 'active' : ''"
+      (click)="selectPage(page)"
+      type="button"
+      *ngFor="let page of returnAllPages()"
+    >
+      {{ page }}
+    </button>
   </div>
-
 </div>

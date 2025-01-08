@@ -11,15 +11,27 @@ import { BackendService } from '../../shared/backend.service';
   styleUrls: ['./data.component.css']
 })
 export class DataComponent {
+  // 'asc' oder 'desc'
+  public sortOrder: 'asc' | 'desc' = 'desc';
 
-  constructor(public storeService: StoreService, private backendService: BackendService) {}
+  public deletingRegistrations: string[] = [];
+
+  constructor(
+    public storeService: StoreService,
+    private backendService: BackendService
+  ) {}
 
   public page: number = 0;
 
   selectPage(i: number) {
     this.page = i;
     this.storeService.currentPage = i;
-    this.backendService.getRegistrations(i);
+    this.backendService.getRegistrations(i, this.sortOrder);
+  }
+
+  toggleSortOrder() {
+    this.sortOrder = this.sortOrder === 'desc' ? 'asc' : 'desc';
+    this.backendService.getRegistrations(this.storeService.currentPage, this.sortOrder);
   }
 
   public returnAllPages() {
@@ -29,5 +41,25 @@ export class DataComponent {
       res.push(i + 1);
     }
     return res;
+  }
+
+  public deleteRegistration(registrationId: string) {
+    this.deletingRegistrations.push(registrationId);
+    this.backendService.deleteRegistration(registrationId).subscribe({
+      next: () => {
+        this.deletingRegistrations = this.deletingRegistrations.filter(
+          id => id !== registrationId
+        );
+      },
+      error: () => {
+        this.deletingRegistrations = this.deletingRegistrations.filter(
+          id => id !== registrationId
+        );
+      }
+    });
+  }
+
+  public isDeleting(registrationId: string): boolean {
+    return this.deletingRegistrations.includes(registrationId);
   }
 }

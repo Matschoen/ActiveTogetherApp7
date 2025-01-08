@@ -71,50 +71,36 @@
   ],
   "registrations": [
     {
-      "id": 1,
-      "name": "Testuser",
-      "birthdate": "2024-11-13",
-      "courseId": "_iL775j"
-    },
-    {
-      "name": "Julia Schabasser",
-      "courseId": "_iL775i",
-      "birthdate": "1995-02-23",
-      "id": 2
-    },
-    {
-      "name": "Julia Schabasser",
+      "name": "Marcel Wagner",
       "courseId": "_iL775a",
-      "birthdate": "1995-02-23",
-      "id": 3
-    },
-    {
-      "name": "Marcel",
-      "courseId": "_iL775j",
       "birthdate": "1992-11-26",
       "newsletter": true,
-      "id": 4
+      "registrationDate": "2025-01-08T18:09:03.276Z",
+      "id": 8
     },
     {
-      "name": "Marcel",
-      "courseId": "_iL775i",
-      "birthdate": "1992-11-26",
+      "name": "Fritz Phantom",
+      "courseId": "_iL775a",
+      "birthdate": "1995-05-05",
       "newsletter": true,
-      "id": 5
+      "registrationDate": "2025-01-08T18:09:50.899Z",
+      "id": 9
     },
     {
-      "name": "a",
+      "name": "Max Muster",
+      "courseId": "_iL775i",
+      "birthdate": "1994-04-04",
+      "newsletter": false,
+      "registrationDate": "2025-01-08T18:48:23.521Z",
+      "id": 10
+    },
+    {
+      "name": "Paul Lutscher",
       "courseId": "_iL775j",
-      "birthdate": "1911-01-01",
+      "birthdate": "1996-06-06",
       "newsletter": true,
-      "id": 6
-    },
-    {
-      "name": "Marcel",
-      "courseId": "_iL775i",
-      "birthdate": "1981-11-15",
-      "newsletter": true,
-      "id": 7
+      "registrationDate": "2025-01-08T18:48:58.487Z",
+      "id": 11
     }
   ]
 }
