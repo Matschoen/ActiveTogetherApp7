@@ -1,7 +1,13 @@
 button.active {
-  background-color: orange;
+  background-color: green;
   color: #fff;
   font-weight: bold;
+}
+
+button.active:hover{
+  background-color: #0056b3;
+  color: #fff;
+  transform: translateY(-2px);
 }
 
 
