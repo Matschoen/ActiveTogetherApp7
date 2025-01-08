@@ -71,50 +71,20 @@
   ],
   "registrations": [
     {
-      "id": 1,
-      "name": "Testuser",
-      "birthdate": "2024-11-13",
-      "courseId": "_iL775j"
-    },
-    {
-      "name": "Julia Schabasser",
-      "courseId": "_iL775i",
-      "birthdate": "1995-02-23",
-      "id": 2
-    },
-    {
-      "name": "Julia Schabasser",
+      "name": "Marcel Wagner",
       "courseId": "_iL775a",
-      "birthdate": "1995-02-23",
-      "id": 3
-    },
-    {
-      "name": "Marcel",
-      "courseId": "_iL775j",
       "birthdate": "1992-11-26",
       "newsletter": true,
-      "id": 4
+      "registrationDate": "2025-01-08T18:09:03.276Z",
+      "id": 8
     },
     {
-      "name": "Marcel",
-      "courseId": "_iL775i",
-      "birthdate": "1992-11-26",
+      "name": "Fritz Phantom",
+      "courseId": "_iL775a",
+      "birthdate": "1995-05-05",
       "newsletter": true,
-      "id": 5
-    },
-    {
-      "name": "a",
-      "courseId": "_iL775j",
-      "birthdate": "1911-01-01",
-      "newsletter": true,
-      "id": 6
-    },
-    {
-      "name": "Marcel",
-      "courseId": "_iL775i",
-      "birthdate": "1981-11-15",
-      "newsletter": true,
-      "id": 7
+      "registrationDate": "2025-01-08T18:09:50.899Z",
+      "id": 9
     }
   ]
 }

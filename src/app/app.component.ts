@@ -11,7 +11,7 @@ import { StoreService } from './shared/store.service';
   imports: [RouterOutlet, HeaderComponent, SharedModule],
   providers: [BackendService, StoreService],
   templateUrl: './app.component.html',
-  styleUrl: './app.component.css'
+  styleUrls: ['./app.component.css']
 })
 export class AppComponent implements OnInit {
 

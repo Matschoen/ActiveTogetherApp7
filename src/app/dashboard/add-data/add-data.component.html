@@ -8,12 +8,19 @@
         <mat-form-field appearance="fill" class="form-field">
           <mat-label>Name</mat-label>
           <input matInput type="text" formControlName="name" placeholder="Name eingeben"/>
+          <!-- Fehlermeldung bei leerem Feld -->
+          <mat-error *ngIf="registrationForm.get('name')?.hasError('required')">
+            Bitte geben Sie einen Namen ein.
+          </mat-error>
         </mat-form-field>
 
         <!-- Birthdate Input -->
         <mat-form-field appearance="fill" class="form-field">
           <mat-label>Geburtsdatum</mat-label>
           <input matInput type="date" formControlName="birthdate"/>
+          <mat-error *ngIf="registrationForm.get('birthdate')?.hasError('required')">
+            Bitte Geburtsdatum eingeben.
+          </mat-error>
         </mat-form-field>
 
         <!-- Course Selection -->
@@ -25,6 +32,9 @@
               {{ course.name }}
             </mat-option>
           </mat-select>
+          <mat-error *ngIf="registrationForm.get('courseId')?.hasError('required')">
+            Bitte Kurs auswählen.
+          </mat-error>
         </mat-form-field>
 
         <!-- Newsletter Checkbox-->
@@ -41,7 +51,7 @@
   </div>
 </div>
 
-
+<!-- Toast-Container -->
 <div class="position-fixed top-0 end-0 p-3" style="z-index: 2000" *ngIf="showToast">
   <div class="toast show align-items-center text-white bg-success border-0" role="alert">
     <div class="d-flex">

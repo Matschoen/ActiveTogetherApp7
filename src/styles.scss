@@ -1,3 +1,21 @@
-/* You can add global styles to this file, and also import other style files */
+
 @import "bootstrap/dist/css/bootstrap.css";
 @import "../node_modules/@angular/material/prebuilt-themes/deeppurple-amber.css";
+
+/* Beispiel Button-Styling */
+.btn {
+  font-weight: bold;
+  text-transform: uppercase;
+  transition: background-color 0.3s ease, transform 0.2s ease;
+}
+
+.btn-danger {
+  background-color: #dc3545;
+  color: #fff;
+  border: none;
+}
+
+.btn-danger:hover {
+  background-color: #c82333;
+  transform: translateY(-1px);
+}

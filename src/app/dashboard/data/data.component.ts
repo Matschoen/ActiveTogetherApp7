@@ -12,9 +12,16 @@ import { BackendService } from '../../shared/backend.service';
 })
 export class DataComponent {
 
-  constructor(public storeService: StoreService, private backendService: BackendService) {}
+  constructor(
+    public storeService: StoreService,
+    private backendService: BackendService
+  ) {}
 
   public page: number = 0;
+
+  // Hier sammeln wir alle Registrierung-IDs, die gerade gelöscht werden,
+  // damit wir den Spinner/Overlay nur in der betroffenen Zeile anzeigen.
+  public deletingRegistrations: string[] = [];
 
   selectPage(i: number) {
     this.page = i;
@@ -30,4 +37,29 @@ export class DataComponent {
     }
     return res;
   }
+
+  // Methode zum Löschen (Abmelden) einer Registrierung
+  public deleteRegistration(registrationId: string) {
+    // 1) Merken, dass diese Registrierung im "Lösch-Prozess" ist:
+    this.deletingRegistrations.push(registrationId);
+
+    // 2) Request an das Backend
+    this.backendService.deleteRegistration(registrationId).subscribe({
+      next: () => {
+        // Nach erfolgreichem Löschen -> Neue Daten holen
+        // und removing aus dem "deletingRegistrations"-Array
+        this.deletingRegistrations = this.deletingRegistrations.filter(id => id !== registrationId);
+      },
+      error: () => {
+        // Falls Fehler, Spinner wieder entfernen:
+        this.deletingRegistrations = this.deletingRegistrations.filter(id => id !== registrationId);
+      }
+    });
+  }
+
+  // Check, ob gerade gelöscht wird:
+  public isDeleting(registrationId: string): boolean {
+    return this.deletingRegistrations.includes(registrationId);
+  }
+
 }
