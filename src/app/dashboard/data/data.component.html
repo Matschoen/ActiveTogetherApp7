@@ -35,10 +35,18 @@
   </div>
 </div>
 
-<!-- Registrierungstabelle -->
 <div class="row mt-4">
   <div class="col-12 col-md-10 offset-md-1">
     <h3 class="mb-3 text-center">Registrierte Personen</h3>
+
+    <div class="d-flex justify-content-end mb-3">
+      <input
+        type="text"
+        placeholder="Suchen..."
+        class="form-control w-25"
+        [(ngModel)]="searchQuery"
+      />
+    </div>
 
     <div class="table-responsive">
       <table class="table table-striped table-bordered">
@@ -47,23 +55,19 @@
           <th>Name</th>
           <th>Geburtsdatum</th>
           <th>Kurs</th>
-
           <th (click)="toggleSortOrder()" style="cursor: pointer;">
             Anmeldedatum
-            <!-- Pfeil nach oben oder unten -->
             <span *ngIf="sortOrder === 'desc'">&#x25BC;</span>
             <span *ngIf="sortOrder === 'asc'">&#x25B2;</span>
+            <span class="text-muted" title="Klicken, um die Reihenfolge zu ändern" style="cursor: help;">&#x1F6C8;</span>
           </th>
-
           <th>Aktionen</th>
         </tr>
         </thead>
         <tbody>
         <tr
-          *ngFor="let registration of storeService.registrations"
+          *ngFor="let registration of getFilteredRegistrations()"
           class="position-relative">
-
-          <!-- Spinner/Overlay -->
           <div
             *ngIf="isDeleting(registration.id)"
             class="overlay-spinner d-flex align-items-center justify-content-center">
@@ -71,8 +75,6 @@
               <span class="visually-hidden">Loading...</span>
             </div>
           </div>
-          <!-- Ende Overlay -->
-
           <td>{{ registration.name }}</td>
           <td>{{ registration.birthdate }}</td>
           <td>{{ registration.course.name }}</td>
@@ -92,15 +94,13 @@
   </div>
 </div>
 
-<!-- Pagination -->
 <div class="row mt-4 justify-content-center">
   <div class="col-12 col-md-10 offset-md-1 d-flex justify-content-center gap-2">
     <button
       [ngClass]="page == storeService.currentPage ? 'active' : ''"
       (click)="selectPage(page)"
       type="button"
-      *ngFor="let page of returnAllPages()"
-    >
+      *ngFor="let page of returnAllPages()">
       {{ page }}
     </button>
   </div>

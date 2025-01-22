@@ -71,22 +71,6 @@
   ],
   "registrations": [
     {
-      "name": "Marcel Wagner",
-      "courseId": "_iL775a",
-      "birthdate": "1992-11-26",
-      "newsletter": true,
-      "registrationDate": "2025-01-08T18:09:03.276Z",
-      "id": 8
-    },
-    {
-      "name": "Fritz Phantom",
-      "courseId": "_iL775a",
-      "birthdate": "1995-05-05",
-      "newsletter": true,
-      "registrationDate": "2025-01-08T18:09:50.899Z",
-      "id": 9
-    },
-    {
       "name": "Max Muster",
       "courseId": "_iL775i",
       "birthdate": "1994-04-04",
@@ -101,6 +85,22 @@
       "newsletter": true,
       "registrationDate": "2025-01-08T18:48:58.487Z",
       "id": 11
+    },
+    {
+      "name": "Marcel",
+      "courseId": "_iL775i",
+      "birthdate": "1992-11-26",
+      "newsletter": false,
+      "registrationDate": "2025-01-22T15:48:14.423Z",
+      "id": 12
+    },
+    {
+      "name": "Marcel",
+      "courseId": "_iL775a",
+      "birthdate": "1992-11-26",
+      "newsletter": true,
+      "registrationDate": "2025-01-22T15:48:30.960Z",
+      "id": 13
     }
   ]
 }

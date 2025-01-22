@@ -2,18 +2,18 @@ import { Component } from '@angular/core';
 import { SharedModule } from '../../shared/shared.module';
 import { StoreService } from '../../shared/store.service';
 import { BackendService } from '../../shared/backend.service';
+import {FormsModule} from "@angular/forms";
 
 @Component({
   selector: 'app-data',
   standalone: true,
-  imports: [SharedModule],
+  imports: [SharedModule, FormsModule],
   templateUrl: './data.component.html',
   styleUrls: ['./data.component.css']
 })
 export class DataComponent {
-  // 'asc' oder 'desc'
   public sortOrder: 'asc' | 'desc' = 'desc';
-
+  public searchQuery: string = '';
   public deletingRegistrations: string[] = [];
 
   constructor(
@@ -44,22 +44,35 @@ export class DataComponent {
   }
 
   public deleteRegistration(registrationId: string) {
-    this.deletingRegistrations.push(registrationId);
-    this.backendService.deleteRegistration(registrationId).subscribe({
-      next: () => {
-        this.deletingRegistrations = this.deletingRegistrations.filter(
-          id => id !== registrationId
-        );
-      },
-      error: () => {
-        this.deletingRegistrations = this.deletingRegistrations.filter(
-          id => id !== registrationId
-        );
-      }
-    });
+    const confirmed = confirm('Möchten Sie diese Registrierung wirklich löschen?');
+    if (confirmed) {
+      this.deletingRegistrations.push(registrationId);
+      this.backendService.deleteRegistration(registrationId).subscribe({
+        next: () => {
+          this.backendService.getRegistrations(this.storeService.currentPage);
+          this.deletingRegistrations = this.deletingRegistrations.filter(
+            id => id !== registrationId
+          );
+        },
+        error: () => {
+          this.deletingRegistrations = this.deletingRegistrations.filter(
+            id => id !== registrationId
+          );
+        }
+      });
+    }
   }
 
   public isDeleting(registrationId: string): boolean {
     return this.deletingRegistrations.includes(registrationId);
+  }
+
+  public getFilteredRegistrations() {
+    const searchText = this.searchQuery.toLowerCase();
+    return this.storeService.registrations.filter(registration =>
+      registration.name.toLowerCase().includes(searchText) ||
+      registration.course.name.toLowerCase().includes(searchText) ||
+      registration.registrationDate?.toLowerCase().includes(searchText)
+    );
   }
 }

@@ -1,3 +1,4 @@
+/* Spinner-Overlay: Blockiert nur die Zeile, in der gelöscht wird */
 .overlay-spinner {
   position: absolute;
   top: 0;
@@ -8,6 +9,7 @@
   z-index: 2;
 }
 
+/* Aktiver Pagination-Button */
 button.active {
   background-color: green;
   color: #fff;
@@ -18,4 +20,35 @@ button.active:hover {
   background-color: #0056b3;
   color: #fff;
   transform: translateY(-2px);
+}
+
+/* Deaktivierte Buttons für visuelle Unterscheidung */
+button:disabled {
+  background-color: #d6d6d6;
+  color: #a5a5a5;
+  cursor: not-allowed;
+}
+
+/* Allgemeines Button-Styling */
+button {
+  transition: background-color 0.3s ease, transform 0.2s ease;
+}
+
+button:hover:not(:disabled) {
+  background-color: #0056b3;
+  color: #fff;
+  transform: translateY(-2px);
+}
+
+/* Tooltip-Icon Styling (für erklärende Texte) */
+th span.text-muted {
+  font-size: 0.85rem;
+  color: #6c757d;
+  margin-left: 0.5rem;
+  cursor: help;
+  text-decoration: underline dotted;
+}
+
+th span.text-muted:hover {
+  color: #0056b3;
 }
